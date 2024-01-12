@@ -1,2 +1,5 @@
 <h1>SipScore</h1>
-A Coffee Tracker App created by Lin Jin, Lulu Htutt, Joanna Lina, and Neha Sunkara.
+A Coffee Tracker App
+
+<h3>Team Members</h3>
+Lin Jin, Lulu Htutt, Joanna Lin, and Neha Sunkara
