@@ -7,11 +7,11 @@ import db
 from db import User
 
 
-def get_user_by_id(id):
+def get_user_by_email(email):
     """
     Returns a user object from the database given an email
     """
-    return User.query.filter(User.userID == id).first()
+    return User.query.filter(User.email == email).first()
 
 
 def get_user_by_session_token(session_token):
@@ -28,11 +28,11 @@ def get_user_by_update_token(update_token):
     return User.query.filter(User.update_token == update_token).first()
 
 
-def verify_credentials(id, password):
+def verify_credentials(email, password):
     """
     Returns true if the credentials match, otherwise returns false
     """
-    optional_user = get_user_by_id(id)
+    optional_user = get_user_by_email(email)
     
     if optional_user is None:
         return False, None
@@ -40,18 +40,18 @@ def verify_credentials(id, password):
     return optional_user.verify_password(password), optional_user
 
 
-def create_user(id, password):
+def create_user(email, password):
     """
     Creates a User object in the database
 
     Returns if creation was successful, and the User object
     """
-    optional_user = get_user_by_id(id)
+    optional_user = get_user_by_email(email)
     
     if optional_user is not None:
         return False, optional_user
 
-    user = User(userId = id, passWord = password)
+    user = User(email = email, passWord = password)
     db.session.add(user)
     db.session.commit()
 
