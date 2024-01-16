@@ -11,7 +11,6 @@ rating = db.Table("rating", db.Model.metadata,
                 db.Column("drinkID", db.Integer, db.ForeignKey('drink.drinkID')),
                 db.Column("wake_me_up", db.Integer)
                 )
-
 class User(db.Model):
     """
     documentations
@@ -36,8 +35,8 @@ class User(db.Model):
        Initialize Users object/entry
        """
     #    self.userID = kwargs.get("userID")
-       self.username = kwargs.get("username")
        self.email = kwargs.get("email")
+       self.username = kwargs.get("username")
        self.password = bcrypt.hashpw(kwargs.get("password").encode("utf8"), bcrypt.gensalt(rounds=13))
        self.profile_picture = kwargs.get("profile_picture", None)
        self.renew_session()
@@ -81,11 +80,18 @@ class User(db.Model):
         """
         Serializes 
         """
+        # drinks = []
+        # if self.drinks:
+        #     drinks = [s.serialize() for s in self.drinks]
+        b = False
+        if self.drinks is None:
+            b = True
         return {
             "userID": self.userID, 
             "username": self.username,
             "profile_picture": self.profile_picture,
-            "drinks": [s.serialize() for s in self.drinks]
+            "drinks": [],
+            "b": b
         }
     
 class Drink(db.Model):
@@ -127,8 +133,6 @@ class Drink(db.Model):
             "drink_picture": self.drink_picture, 
             "seasonal": self.seasonal, 
             "caffeine_amt": self.caffeine_amt, 
-            "location": self.location,
-            "user": [s.serialize() for s in self.user]
+            "location": self.location
         }
-    
     

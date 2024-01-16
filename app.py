@@ -2,7 +2,7 @@ import json
 from flask import Flask, request
 import users_dao
 import datetime
-from db import db
+from db import *
 import json 
 from db import Drink 
 from db import User 
@@ -73,7 +73,7 @@ def delete_drink(drink_id):
     db.session.commit()
     return success_response(drink.serialize())
 
-@app.route("/api/drinks/", methods=["POST"])
+@app.route("/api/createdrink/", methods=["POST"])
 def create_drink():
     """
     Endpoint for creating a new drink
@@ -113,19 +113,16 @@ def register_account():
 
     if email is None or password is None:
         return failure_response("Missing email or password", 400)
-
-    success, user = users_dao.create_user(email, password)
-
-    if not success:
-        return failure_response("User already exists", 400)
     
     if username is None: 
         return failure_response("Missing required info", 400)
-    
-    user.username = username
-    user.picture = picture
 
-    return success_response(user)
+    success, user = users_dao.create_user(email, password, username, picture)
+
+    if not success:
+        return failure_response("User already exists", 400)
+
+    return success_response(user.serialize())
 
 @app.route("/api/login/", methods=["POST"])
 def login():
