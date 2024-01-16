@@ -7,8 +7,8 @@ from flask_sqlalchemy import SQLAlchemy
 db = SQLAlchemy()
 
 rating = db.Table("rating", db.Model.metadata,
-                db.Column("user_id", db.Integer, db.ForeignKey('user.id')),
-                db.Column("drink_id", db.Integer, db.ForeignKey('drink.id')),
+                db.Column("userID", db.Integer, db.ForeignKey('user.userID')),
+                db.Column("drinkID", db.Integer, db.ForeignKey('drink.drinkID')),
                 db.Column("wake_me_up", db.Integer)
                 )
 
@@ -23,6 +23,7 @@ class User(db.Model):
     email = db.Column(db.String, nullable=False)
     password = db.Column(db.String, nullable=False)
     profile_picture = db.Column(db.LargeBinary, nullable=True)
+    
 
     drinks = db.relationship(
         "Drink",
@@ -34,10 +35,10 @@ class User(db.Model):
        """
        Initialize Users object/entry
        """
-       self.drinkID = kwargs.get("drinkID")
+    #    self.userID = kwargs.get("userID")
        self.username = kwargs.get("username")
        self.email = kwargs.get("email")
-       self.password = bcrypt.hashpw(kwargs.get("passWord").encode("utf8"), bcrypt.gensalt(rounds=13))
+       self.password = bcrypt.hashpw(kwargs.get("password").encode("utf8"), bcrypt.gensalt(rounds=13))
        self.profile_picture = kwargs.get("profile_picture", None)
        self.renew_session()
 
@@ -78,7 +79,7 @@ class User(db.Model):
 
     def serialize(self):
         """
-        Seriaizes 
+        Serializes 
         """
         return {
             "userID": self.userID, 
@@ -100,13 +101,14 @@ class Drink(db.Model):
     user = db.relationship(
         "User",
         secondary="rating",
-        back_populates = "drink"
+        back_populates = "drinks"
     )
 
     def __init__(self, **kwargs):
        """
        Initialize Users object/entry
        """
+    #    self.drinkID = kwargs.get("drinkID")
        self.name = kwargs.get("name")
        self.serving_size = kwargs.get("serving_size")
        self.location = kwargs.get("location")

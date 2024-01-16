@@ -1,12 +1,14 @@
 import json
 from flask import Flask, request
-import dao
 import users_dao
 import datetime
 from db import db
+import json 
+from db import Drink 
+from db import User 
 
 # define db filename
-db_filename = "todo.db"
+db_filename = "sipscore.db"
 app = Flask(__name__)
 
 # setup config
@@ -41,10 +43,14 @@ def extract_token(request):
 
     return True, bearer_token
 
+@app.route("/api/", methods=["GET"])
+def greeting(): 
+    return success_response("Welcome")
+
 
 @app.route("/api/User/<int:user_id>/", methods=["GET"])
 def get_user(user_id):
-    user = db.User.query.get(user_id)
+    user = User.query.get(user_id)
 
     if user:
         return success_response(user.serialize())
@@ -53,29 +59,27 @@ def get_user(user_id):
 
 @app.route("/api/drinks/", methods=["GET"])
 def get_drinks():
-  return success_response({"drinks": [c.serialize() for c in db.Drink.query.all()]})
+  return success_response({"drinks": [c.serialize() for c in Drink.query.all()]})
 
 @app.route("/api/drinks/<int:drink_id>/", methods=["DELETE"])
 def delete_drink(drink_id):
     """
     Endpoint for deleting a drink by id
     """
-    drink = db.query.filter_by(id=drink_id).first()
+    drink = Drink.query.filter_by(drink_id=drink_id).first()
     if drink is None:
         return failure_response("Drink not found")
     db.session.delete(drink)
     db.session.commit()
     return success_response(drink.serialize())
 
-@app.route("/api/dtinks/", methods=["POST"])
+@app.route("/api/drinks/", methods=["POST"])
 def create_drink():
     """
     Endpoint for creating a new drink
     """
     body = json.loads(request.data)
-    drinkID = body.get("code")
-    if drinkID is None:
-        return failure_response("Code not provided", 400)
+    
     name = body.get("name")
     if name is None:
         return failure_response("Name not provided", 400)
@@ -90,7 +94,7 @@ def create_drink():
     if caffeine_amt is None: 
         return failure_response("Caffeine amt not provided", 400)
     drink_picture = body.get("drink_picture")
-    new_drink = db.Drink(drinkID=drinkID, serving_size=serving_size, location=location, seasonal=seasonal,caffeine_amt= caffeine_amt, drink_picture=drink_picture)
+    new_drink = Drink(serving_size=serving_size, location=location, seasonal=seasonal,caffeine_amt= caffeine_amt, drink_picture=drink_picture)
     db.session.add(new_drink)
     db.session.commit()
     return success_response(new_drink.serialize(), 201)
@@ -104,6 +108,8 @@ def register_account():
     body = json.loads(request.data)
     email = body.get("email")
     password = body.get("password")
+    username = body.get("username")
+    picture = body.get("picture")
 
     if email is None or password is None:
         return failure_response("Missing email or password", 400)
@@ -112,13 +118,14 @@ def register_account():
 
     if not success:
         return failure_response("User already exists", 400)
+    
+    if username is None: 
+        return failure_response("Missing required info", 400)
+    
+    user.username = username
+    user.picture = picture
 
-    return success_response({
-        "session_token": user.session_token,
-        "session_expiration": str(user.session_expiration),
-        "update_token": user.update_token
-    }
-    )
+    return success_response(user)
 
 @app.route("/api/login/", methods=["POST"])
 def login():
@@ -187,4 +194,4 @@ def logout():
     return success_response({"message": "You have successfully logged out."})
 
 if __name__ == "__main__":
-    app.run(host="localhost", port=int("5000"))
+    app.run(host="localhost", port=8000, debug=True)
