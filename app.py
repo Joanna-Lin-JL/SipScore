@@ -47,10 +47,13 @@ def extract_token(request):
 def greeting(): 
     return success_response("Welcome")
 
+@app.route("/api/users/", methods=["GET"])
+def get_users():
+  return success_response({"users": [c.serialize() for c in User.query.all()]})
 
-@app.route("/api/User/<int:user_id>/", methods=["GET"])
-def get_user(user_id):
-    user = User.query.get(user_id)
+@app.route("/api/User/<int:userID>/", methods=["GET"])
+def get_user(userID):
+    user = User.query.get(userID)
 
     if user:
         return success_response(user.serialize())
@@ -61,12 +64,12 @@ def get_user(user_id):
 def get_drinks():
   return success_response({"drinks": [c.serialize() for c in Drink.query.all()]})
 
-@app.route("/api/drinks/<int:drink_id>/", methods=["DELETE"])
-def delete_drink(drink_id):
+@app.route("/api/drinks/<int:drinkID>/", methods=["DELETE"])
+def delete_drink(drinkID):
     """
     Endpoint for deleting a drink by id
     """
-    drink = Drink.query.filter_by(drink_id=drink_id).first()
+    drink = Drink.query.filter_by(drinkID=drinkID).first()
     if drink is None:
         return failure_response("Drink not found")
     db.session.delete(drink)
@@ -94,7 +97,7 @@ def create_drink():
     if caffeine_amt is None: 
         return failure_response("Caffeine amt not provided", 400)
     drink_picture = body.get("drink_picture")
-    new_drink = Drink(serving_size=serving_size, location=location, seasonal=seasonal,caffeine_amt= caffeine_amt, drink_picture=drink_picture)
+    new_drink = Drink(name=name, serving_size=serving_size, location=location, seasonal=seasonal,caffeine_amt= caffeine_amt, drink_picture=drink_picture)
     db.session.add(new_drink)
     db.session.commit()
     return success_response(new_drink.serialize(), 201)
@@ -140,6 +143,11 @@ def login():
 
     if not success:
         return failure_response("Incorrect email or password", 401)
+    
+    if user is None: 
+        return failure_response("login error", 401)
+    
+    user.renew_session()
 
     return success_response({
         "session_token": user.session_token,

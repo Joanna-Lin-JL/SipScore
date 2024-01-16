@@ -23,6 +23,9 @@ class User(db.Model):
     password = db.Column(db.String, nullable=False)
     profile_picture = db.Column(db.LargeBinary, nullable=True)
     
+    session_token = db.Column(db.String, nullable=False, unique=True)
+    session_expiration = db.Column(db.DateTime, nullable=False)
+    update_token = db.Column(db.String, nullable=False, unique=True)
 
     drinks = db.relationship(
         "Drink",
@@ -80,18 +83,12 @@ class User(db.Model):
         """
         Serializes 
         """
-        # drinks = []
-        # if self.drinks:
-        #     drinks = [s.serialize() for s in self.drinks]
-        b = False
-        if self.drinks is None:
-            b = True
+
         return {
             "userID": self.userID, 
             "username": self.username,
             "profile_picture": self.profile_picture,
-            "drinks": [],
-            "b": b
+            "drinks": [c.serialize() for c in self.drinks]
         }
     
 class Drink(db.Model):

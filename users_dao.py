@@ -67,7 +67,7 @@ def renew_session(update_token):
     user = get_user_by_update_token(update_token)
 
     if user is None:
-        raise Exception("Invalid update token")
+        return False, None
 
     user.renew_session()
     db.session.commit()
