@@ -2,3 +2,22 @@
 venv/*
 __pycache__/*
 instance/*
+
+sipscore-frontend/node_modules
+sipscore-frontend/.pnp
+sipscore-frontend.pnp.js
+
+sipscore-frontend/coverage
+
+sipscore-frontend/build
+
+# misc
+sipscore-frontend/.DS_Store
+sipscore-frontend/.env.local
+sipscore-frontend/.env.development.local
+sipscore-frontend/.env.test.local
+sipscore-frontend/.env.production.local
+
+sipscore-frontend/npm-debug.log*
+sipscore-frontend/yarn-debug.log*
+sipscore-frontend/yarn-error.log*
