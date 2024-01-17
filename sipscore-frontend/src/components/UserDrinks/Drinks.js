@@ -1,7 +1,8 @@
 import React from 'react';
 import Card from '@mui/material/Card';
 
-function Drink(props) {
+
+function Drinks(props) {
     return (
         <Card style={{ width: '18rem' }}>
             <Card.Img variant="top" src={props.picture} />

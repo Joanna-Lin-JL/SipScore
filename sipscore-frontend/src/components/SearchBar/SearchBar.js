@@ -1,9 +1,13 @@
+/* SearchBar.js */
+
 import React, { useState } from 'react'
+import './SearchBar.css';
 
 const SearchBar = () => {
     const [searchInput, setSearchInput] = useState("");
     const [filteredCountries, setFilteredCountries] = useState([]);
 
+    // replace with drinks from backend
     const countries = [
         { name: "Belgium" },
         { name: "India" },
@@ -27,16 +31,6 @@ const SearchBar = () => {
         setSearchInput(countryName);
         setFilteredCountries([]);
     };
-
-    // const filteredCountries = countries.filter((country) => {
-    //     return country.name.toLowerCase().includes(searchInput.toLowerCase());
-    // })
-
-    // if (searchInput.length > 0) {
-    //     countries.filter((country) => {
-    //         return country.name.match(searchInput);
-    //     });
-    // }
 
     return (
         <div>

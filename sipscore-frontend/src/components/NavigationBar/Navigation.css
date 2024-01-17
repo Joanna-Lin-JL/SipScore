@@ -1,13 +1,15 @@
 /* Navigation.css */
 
 nav {
+    margin-top: -4px;
     background-color: #c19a6b;
-    padding: 10px;
+    padding: 2%;
+    text-align: center;
+    /* Center the text within the nav */
 }
 
 ul {
     list-style: none;
-    /* Remove bullet points */
     margin: 0;
     padding: 0;
 }
@@ -20,5 +22,7 @@ li {
 a {
     text-decoration: none;
     color: white;
-    font-size: 18px;
+    font-size: 20px;
+    font-weight: bold;
+    /* Bold the text */
 }

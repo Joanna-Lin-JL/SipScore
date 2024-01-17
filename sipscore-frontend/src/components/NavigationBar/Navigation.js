@@ -2,6 +2,8 @@
 
 import React from 'react';
 import './Navigation.css';
+import '../User/User';
+
 function Navigation() {
     return (
         <nav>

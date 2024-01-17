@@ -4,6 +4,7 @@ import Navigation from './components/NavigationBar/Navigation';
 import Header from './components/Header/Header';
 import SearchBar from './components/SearchBar/SearchBar';
 import CircularButton from './components/addButton';
+import User from './components/User/User';
 import './App.css';
 
 function App() {
@@ -15,7 +16,23 @@ function App() {
         "caffeine_amt": 0,
         "seasonal": false,
         "location": ""
-    })
+    });
+    const [recentDrinks, setRecentDrinks] = useState({
+        "name": "",
+        "serving_size": 0,
+        "picture": "",
+        "caffeine_amt": 0,
+        "seasonal": false,
+        "location": ""
+    });
+    const [favDrinks, setFavDrinks] = useState({
+        "name": "",
+        "serving_size": 0,
+        "picture": "",
+        "caffeine_amt": 0,
+        "seasonal": false,
+        "location": ""
+    });
 
     useEffect(() => {
         fetch("api/").then((res) => {
@@ -28,21 +45,10 @@ function App() {
         <div className="App">
             <header className="App-header">
                 <Header />
-                <h1>SipScore</h1>
                 <Navigation></Navigation>
                 <SearchBar />
-                <p>
-                    Edit <code>src/App.js</code> and save to reload.
-                </p>
-                <a
-                    className="App-link"
-                    href="photos/sip_score_banner.png"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                >
-                    Change test
-                </a>
                 <CircularButton />
+                {/* <User /> */}
             </header>
         </div>
     );
