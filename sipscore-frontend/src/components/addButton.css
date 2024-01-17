@@ -1,0 +1,23 @@
+/* CircularButton.css */
+
+.circular-button {
+    position: fixed;
+    bottom: 10%;
+    right: 10%;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background-color: #f0c908;
+    /* Green background color, you can customize */
+    color: white;
+    font-size: 60px;
+    border: none;
+    cursor: pointer;
+    outline: none;
+    /* Add additional styles as needed */
+}
+
+.circular-button:hover {
+    background-color: #ec8004;
+    /* Darker green on hover, you can customize */
+}
