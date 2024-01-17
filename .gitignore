@@ -3,6 +3,8 @@ venv/*
 __pycache__/*
 instance/*
 
+node_modules/
+
 sipscore-frontend/node_modules
 sipscore-frontend/.pnp
 sipscore-frontend.pnp.js
