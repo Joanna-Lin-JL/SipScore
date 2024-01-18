@@ -1,8 +1,13 @@
-<h1>SipScore</h1>
-A Coffee Tracker App
+<img src="/sipscore-frontend/src/photos/sip_score_banner.png">
 
 <h3>Team Members</h3>
-Lin Jin, Lulu Htutt, Joanna Lin, and Neha Sunkara
+<li>Lin Jin</li>
+<li>Lulu Htutt</li>
+<li>Joanna Lin</li>
+<li>Neha Sunkara</li>
 
-npm install react-scripts
-yarn add react-scripts
+<h3>Installation</h3>
+<li><code>npm install react-scripts</code>
+or
+<code>yarn add react-scripts</code></li>
+<li><code>npm install react-router-dom</code></li>

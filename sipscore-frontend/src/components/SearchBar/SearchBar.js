@@ -66,7 +66,7 @@ const SearchBar = () => {
         <div className="search-bar-container" ref={searchContainerRef}>
             <input
                 type="text"
-                placeholder="Search"
+                placeholder="Item Name"
                 value={searchInput}
                 onChange={handleInputChange}
                 onClick={toggleDropdown}

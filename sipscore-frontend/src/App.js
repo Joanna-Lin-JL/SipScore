@@ -40,9 +40,14 @@ function App() {
         getData("api/").then((data) => {
             data.text().then((d) => console.log(d.data))
         })
-        getData("api/drinks/").then((data) => {
-            data.text().then((d) => console.log(d))
+        getData("api/drinks/").then((res) => {
+            res.json().then((d) => {
+                d.data.drinks.map(function (data) {
+                    return new Drink(data.drinkID, data.name, data.serving_size, data.picture, data.caffeine_amt, data.seasonal, data.location)
+                })
+            })
         })
+        console.log(allDrinks);
         // fetch("http://localhost:8000/api/drinks/").then((res) => {
         //     // dissect json object into javscript object later
         //     console.log("fetched");

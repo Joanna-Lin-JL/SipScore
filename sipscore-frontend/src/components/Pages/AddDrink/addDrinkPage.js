@@ -1,10 +1,11 @@
 import banner from './photos/sip_score_banner.png';
 import React, { useState, useEffect } from "react";
-import Navigation from './components/NavigationBar/Navigation';
-import Header from './components/Header/Header';
-import SearchBar from './components/SearchBar/SearchBar';
+import Navigation from '../../NavigationBar/Navigation';
+import Header from '../../Header/Header';
+import SearchBar from '../../SearchBar/SearchBar';
 import CircularButton from './components/addButton';
 import User from './components/User/User';
+import InputDrink from "./CalculateYourOwn"
 import './App.css';
 
 function AddDrink() {
@@ -28,7 +29,7 @@ function AddDrink() {
     });
 
     useEffect(() => {
-        fetch("api/").then((res) => {
+        fetch("api/drinks").then((res) => {
             console.log(res);
         }
         );
@@ -41,6 +42,7 @@ function AddDrink() {
                 <Navigation></Navigation>
                 <SearchBar />
                 <CircularButton />
+                <InputDrink />
                 {/* <User /> */}
             </header>
         </div>
