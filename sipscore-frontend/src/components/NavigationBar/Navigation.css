@@ -12,12 +12,19 @@ ul {
     list-style: none;
     margin: 0;
     padding: 0;
+    display: flex;
+    justify-content: center;
+    /* Center the ul horizontally */
 }
 
 li {
     display: inline-block;
-    margin-right: 10%;
+    margin-left: 7%;
+    margin-right: 7%;
+    /* Adjust the margin as needed */
 }
+
+
 
 a {
     text-decoration: none;

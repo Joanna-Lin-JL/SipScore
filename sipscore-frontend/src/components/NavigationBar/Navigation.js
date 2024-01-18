@@ -2,7 +2,7 @@
 
 import React from 'react';
 import './Navigation.css';
-import '../User/User';
+import '../Pages/UserProfile/User';
 
 function Navigation() {
     return (

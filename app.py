@@ -1,5 +1,6 @@
 import json
 from flask import Flask, request
+from flask_cors import CORS
 import users_dao
 import datetime
 from db import *
@@ -10,6 +11,7 @@ from db import User
 # define db filename
 db_filename = "sipscore.db"
 app = Flask(__name__)
+CORS(app)
 
 # setup config
 app.config["SQLALCHEMY_DATABASE_URI"] = f"sqlite:///{db_filename}"

@@ -1,5 +1,6 @@
 .DS_Store
-venv/*
+venv/
+sipscore-frontend/venv
 __pycache__/*
 instance/*
 
