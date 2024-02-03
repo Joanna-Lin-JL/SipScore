@@ -7,7 +7,9 @@ import CircularButton from './components/CircularButton/addButton';
 import UserProfile from './components//Pages/UserProfile/User';
 import Drink from "./drink"
 import User from "./user"
+import Login from './components/Pages/Login/Login'
 import './App.css';
+import AddViaSearch from './components/Pages/AddDrink/AddViaSearch';
 
 function App() {
 
@@ -42,12 +44,14 @@ function App() {
         })
         getData("api/drinks/").then((res) => {
             res.json().then((d) => {
-                d.data.drinks.map(function (data) {
+                const data_drinks = d.data.drinks.map(function (data) {
                     return new Drink(data.drinkID, data.name, data.serving_size, data.picture, data.caffeine_amt, data.seasonal, data.location)
                 })
+                setAllDrinks(data_drinks);
             })
-        })
+        });
         console.log(allDrinks);
+
         // fetch("http://localhost:8000/api/drinks/").then((res) => {
         //     // dissect json object into javscript object later
         //     console.log("fetched");
@@ -68,8 +72,11 @@ function App() {
             <header className="App-header">
                 <Header />
                 <Navigation />
-                <SearchBar />
+                <SearchBar drinks={allDrinks} />
                 <CircularButton />
+                <Login />
+                {/* <AddViaSearch /> */}
+                {/* <UserProfile /> */}
                 {/* <SearchDrop /> */}
                 {/* <User 
                     profile_pic = users.profile_pic

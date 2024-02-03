@@ -3,7 +3,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import './SearchBar.css';
 
-const SearchBar = () => {
+const SearchBar = ({ drinks }) => {
     const [searchInput, setSearchInput] = useState("");
     const [filteredCountries, setFilteredCountries] = useState([]);
     const [isDropdownOpen, setDropdownOpen] = useState(false);
@@ -11,20 +11,22 @@ const SearchBar = () => {
     const searchContainerRef = useRef(null);
 
     // Replace with drinks from backend
-    const countries = [
-        { name: "Belgium" },
-        { name: "India" },
-        { name: "Bolivia" },
-        { name: "Ghana" },
-        { name: "Japan" },
-        { name: "Canada" },
-        { name: "Brazil" },
-        { name: "Australia" },
-        { name: "Italy" },
-        { name: "Mexico" },
-        { name: "South Korea" },
-        { name: "Netherlands" },
-    ];
+    // const countries = [
+    //     { name: "Belgium" },
+    //     { name: "India" },
+    //     { name: "Bolivia" },
+    //     { name: "Ghana" },
+    //     { name: "Japan" },
+    //     { name: "Canada" },
+    //     { name: "Brazil" },
+    //     { name: "Australia" },
+    //     { name: "Italy" },
+    //     { name: "Mexico" },
+    //     { name: "South Korea" },
+    //     { name: "Netherlands" },
+    // ];
+
+    const countries = drinks;
 
 
     const handleInputChange = (e) => {
@@ -87,7 +89,6 @@ const SearchBar = () => {
             )}
             {selectedOption && (
                 <div>
-                    Selected: {selectedOption.name}
                 </div>
             )}
         </div>

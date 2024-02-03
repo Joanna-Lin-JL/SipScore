@@ -3,7 +3,7 @@ import Drinks from '../../UserDrinks/Drinks';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 
-function UserProfile(props) {
+function UserProfile({ props }) {
     return (
         <div className='profile'>
             <span className='desc'><img className='profilePic' src={props.profile_pic} />{props.username}</span>
