@@ -5,6 +5,7 @@
 <li>Lulu Htutt</li>
 <li>Joanna Lin</li>
 <li>Neha Sunkara</li>
+<li>Uyen Hoang</li>
 
 <h3>Installation</h3>
 <li><code>npm install react-scripts</code>
